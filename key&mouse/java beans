@@ -1,0 +1,75 @@
+/*Steps to Execute (in a Java EE application):
+
+Write your JavaBean (like Book.java).
+
+Use the Servlet or JSP to create and interact with JavaBeans.
+
+Deploy the application on a web container (e.g., Tomcat, Wildfly).
+
+Access the application through a browser or client.
+
+Example: JavaBean used with a Servlet */
+
+// Book.java (JavaBean)
+public class Book {
+    private String title;
+    private String author;
+    private double price;
+
+    public Book() {}
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+}
+
+// BookServlet.java (Servlet interacting with JavaBean)
+@WebServlet("/book")
+public class BookServlet extends HttpServlet {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        Book book = new Book();
+        book.setTitle("The Alchemist");
+        book.setAuthor("Paulo Coelho");
+        book.setPrice(299.99);
+
+        // Set the book object in the request scope for JSP
+        request.setAttribute("book", book);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("book.jsp");
+        dispatcher.forward(request, response);
+    }
+}
+
+/*You can use JavaBeans in JSP (JavaServer Pages) to display data from your beans in a web page. Here's how you can interact with a JavaBean in a JSP page:
+
+Example JSP Page (book.jsp): */
+<%@ page import="yourpackage.Book" %>
+
+<html>
+<body>
+    <h2>Book Details</h2>
+    <p>Title: ${book.title}</p>
+    <p>Author: ${book.author}</p>
+    <p>Price: $${book.price}</p>
+</body>
+</html>

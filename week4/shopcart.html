@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Shopping Cart - Online Bookstore</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background: #f9f9f9;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      .container {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+
+      .book-list,
+      .cart {
+        width: 45%;
+        padding: 20px;
+        margin: 10px;
+        background: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+      }
+
+      .book-item {
+        border-bottom: 1px solid #eee;
+        padding: 10px 0;
+      }
+
+      .book-item:last-child {
+        border-bottom: none;
+      }
+
+      .book-item button {
+        margin-left: 10px;
+        padding: 6px 12px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .book-item button:hover {
+        background-color: #0056b3;
+      }
+
+      .cart ul {
+        list-style-type: none;
+        padding-left: 0;
+      }
+
+      .cart li {
+        padding: 8px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .remove-btn {
+        padding: 4px 8px;
+        background-color: #dc3545;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.9em;
+      }
+
+      .remove-btn:hover {
+        background-color: #c82333;
+      }
+
+      .cart-summary {
+        margin-top: 10px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🛒 Online Bookstore - Shopping Cart</h1>
+
+    <div class="container">
+      <!-- Book List -->
+      <div class="book-list">
+        <h2>Available Books</h2>
+        <div class="book-item">
+          <strong>The Alchemist</strong> by Paulo Coelho
+          <button onclick="addToCart('The Alchemist')">Add to Cart</button>
+        </div>
+        <div class="book-item">
+          <strong>Harry Potter</strong> by J.K. Rowling
+          <button onclick="addToCart('Harry Potter')">Add to Cart</button>
+        </div>
+        <div class="book-item">
+          <strong>To Kill a Mockingbird</strong> by Harper Lee
+          <button onclick="addToCart('To Kill a Mockingbird')">
+            Add to Cart
+          </button>
+        </div>
+        <div class="book-item">
+          <strong>1984</strong> by George Orwell
+          <button onclick="addToCart('1984')">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- Shopping Cart -->
+      <div class="cart">
+        <h2>Your Cart</h2>
+        <ul id="cartItems">
+          <li>No items in cart.</li>
+        </ul>
+        <div class="cart-summary" id="cartSummary">Total Items: 0</div>
+      </div>
+    </div>
+
+    <script>
+      const cart = {};
+
+      function addToCart(bookName) {
+        if (cart[bookName]) {
+          cart[bookName]++;
+        } else {
+          cart[bookName] = 1;
+        }
+        updateCartUI();
+      }
+
+      function removeFromCart(bookName) {
+        if (cart[bookName]) {
+          cart[bookName]--;
+          if (cart[bookName] === 0) {
+            delete cart[bookName];
+          }
+          updateCartUI();
+        }
+      }
+
+      function updateCartUI() {
+        const cartItems = document.getElementById("cartItems");
+        const cartSummary = document.getElementById("cartSummary");
+
+        cartItems.innerHTML = "";
+        let totalItems = 0;
+
+        for (let book in cart) {
+          const quantity = cart[book];
+          totalItems += quantity;
+
+          const li = document.createElement("li");
+          li.innerHTML = `
+          ${book} (x${quantity})
+          <button class="remove-btn" onclick="removeFromCart('${book}')">Remove</button>
+        `;
+          cartItems.appendChild(li);
+        }
+
+        if (totalItems === 0) {
+          cartItems.innerHTML = "<li>No items in cart.</li>";
+        }
+
+        cartSummary.textContent = `Total Items: ${totalItems}`;
+      }
+    </script>
+  </body>
+</html>

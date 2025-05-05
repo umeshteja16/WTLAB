@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE userAccounts SYSTEM "store.dtd">
+<userAccounts>
+    <user>
+        <username>johndoe</username>
+        <password>encrypted_password_here</password>
+        <email>johndoe@example.com</email>
+        <purchaseHistory>
+            <purchase>
+                <itemID>12345</itemID>
+                <itemName>Smartphone</itemName>
+                <purchaseDate>2025-03-15</purchaseDate>
+                <amount>499.99</amount>
+            </purchase>
+            <purchase>
+                <itemID>67890</itemID>
+                <itemName>Laptop</itemName>
+                <purchaseDate>2025-02-10</purchaseDate>
+                <amount>899.99</amount>
+            </purchase>
+        </purchaseHistory>
+    </user>
+
+    <user>
+        <username>janedoe</username>
+        <password>encrypted_password_here</password>
+        <email>janedoe@example.com</email>
+        <purchaseHistory>
+            <purchase>
+                <itemID>11223</itemID>
+                <itemName>Headphones</itemName>
+                <purchaseDate>2025-03-20</purchaseDate>
+                <amount>99.99</amount>
+            </purchase>
+        </purchaseHistory>
+    </user>
+</userAccounts>

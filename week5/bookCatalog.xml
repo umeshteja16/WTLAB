@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE catalog SYSTEM "bookCatalog.dtd">
+<catalog>
+    <book>
+       <title>The great indian</title>
+       <author>F.Geroge</author>
+       <genre>fiction</genre>
+       <price>10.966</price>
+       <availability>IN stock</availability>
+    </book>
+    <book>
+        <title>hello world!</title>
+        <author>hasini</author>
+        <genre>programming</genre>
+        <price>15.899</price>
+        <availability>Out of Stock</availability>
+    </book>
+</catalog>

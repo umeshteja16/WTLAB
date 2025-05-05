@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Online Bookstore - Registration & Forgot Password</title>
+    <style>
+      .error {
+        color: red;
+      }
+      .success {
+        color: green;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+      form {
+        margin-bottom: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- User Registration Form -->
+    <h2>User Registration</h2>
+    <form id="registrationForm">
+      <label>Username:</label><br />
+      <input type="text" id="username" /><br /><br />
+
+      <label>Password:</label><br />
+      <input type="password" id="password" /><br /><br />
+
+      <label>Confirm Password:</label><br />
+      <input type="password" id="confirmPassword" /><br /><br />
+
+      <button type="submit">Register</button>
+      <p id="regMessage"></p>
+    </form>
+
+    <!-- Forgot Password Section -->
+    <h2>Forgot Password</h2>
+    <form id="forgotForm">
+      <label>Email:</label><br />
+      <input type="email" id="email" /><br /><br />
+
+      <button type="submit">Reset Password</button>
+      <p id="emailMessage"></p>
+    </form>
+
+    <script>
+      // Registration Form Validation
+      document
+        .getElementById("registrationForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const username = document.getElementById("username").value.trim();
+          const password = document.getElementById("password").value;
+          const confirmPassword =
+            document.getElementById("confirmPassword").value;
+          const regMessage = document.getElementById("regMessage");
+
+          if (username.length < 5) {
+            regMessage.textContent = "Username must be at least 5 characters.";
+            regMessage.className = "error";
+          } else if (password.length < 8) {
+            regMessage.textContent = "Password must be at least 8 characters.";
+            regMessage.className = "error";
+          } else if (password !== confirmPassword) {
+            regMessage.textContent = "Passwords do not match.";
+            regMessage.className = "error";
+          } else {
+            regMessage.textContent = "Registration successful!";
+            regMessage.className = "success";
+          }
+        });
+
+      // Forgot Password Email Validation
+      const existingAccounts = ["user1@example.com", "reader@books.com"];
+      document
+        .getElementById("forgotForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const email = document.getElementById("email").value.trim();
+          const emailMessage = document.getElementById("emailMessage");
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+          if (!emailRegex.test(email)) {
+            emailMessage.textContent = "Invalid email format.";
+            emailMessage.className = "error";
+          } else if (!existingAccounts.includes(email)) {
+            emailMessage.textContent =
+              "Email is not associated with any account.";
+            emailMessage.className = "error";
+          } else {
+            emailMessage.textContent =
+              "Password reset link sent to your email.";
+            emailMessage.className = "success";
+          }
+        });
+    </script>
+  </body>
+</html>

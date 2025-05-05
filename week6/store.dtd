@@ -1,0 +1,11 @@
+<!ELEMENT userAccounts (user+)>
+<!ELEMENT user (username, password, email, purchaseHistory)>
+<!ELEMENT username (#PCDATA)>
+<!ELEMENT password (#PCDATA)>
+<!ELEMENT email (#PCDATA)>
+<!ELEMENT purchaseHistory (purchase+)>
+<!ELEMENT purchase (itemID, itemName, purchaseDate, amount)>
+<!ELEMENT itemID (#PCDATA)>
+<!ELEMENT itemName (#PCDATA)>
+<!ELEMENT purchaseDate (#PCDATA)>
+<!ELEMENT amount (#PCDATA)>

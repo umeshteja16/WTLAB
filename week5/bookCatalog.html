@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Book Catalog</title>
+    <style>
+      body {
+        font-family: Arial;
+        background-color: #f1f1f1;
+        padding: 50px;
+        display: flex;
+        justify-content: center;
+      }
+      .catalog-container {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px #ccc;
+        padding: 20px;
+        width: 90%;
+        max-width: 800px;
+      }
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: center;
+      }
+      th {
+        background-color: #4caf50;
+        color: white;
+      }
+      tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+      tr:hover {
+        background-color: #efefef;
+      }
+      .price-controls {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+      }
+      .btn {
+        padding: 3px 8px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .btn:hover {
+        background-color: #388e3c;
+      }
+      .price-display {
+        min-width: 60px;
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="catalog-container">
+      <h1>Book Catalog</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Genre</th>
+            <th>Price</th>
+            <th>Availability</th>
+          </tr>
+        </thead>
+        <tbody id="bookTable">
+          <!--XML DATA WILL POPULATE HERE-->
+        </tbody>
+      </table>
+    </div>
+    <script>
+      function loadXML() {
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", "bookCatalog.xml", true);
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            const xml = xhr.responseXML;
+            displayBooks(xml);
+          }
+        };
+        xhr.send();
+      }
+
+      function displayBooks(xml) {
+        const books = xml.getElementsByTagName("book");
+        const table = document.getElementById("bookTable");
+
+        for (let i = 0; i < books.length; i++) {
+          const title = books[i].getElementsByTagName("title")[0].textContent;
+          const author = books[i].getElementsByTagName("author")[0].textContent;
+          const genre = books[i].getElementsByTagName("genre")[0].textContent;
+          const price = parseFloat(
+            books[i].getElementsByTagName("price")[0].textContent
+          );
+          const availability =
+            books[i].getElementsByTagName("availability")[0].textContent;
+
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${title}</td>
+            <td>${author}</td>
+            <td>${genre}</td>
+            <td>
+              <div class="price-controls">
+                <button class="btn" onclick="updatePrice(${i}, 'decrease')">-</button>
+                <span class="price-display" id="price-${i}">$${price.toFixed(
+            2
+          )}</span>
+                <button class="btn" onclick="updatePrice(${i}, 'increase')">+</button>
+              </div>
+            </td>
+            <td>${availability}</td>
+          `;
+          table.appendChild(row);
+        }
+      }
+
+      function updatePrice(index, action) {
+        const priceElement = document.getElementById(`price-${index}`);
+        let currentPrice = parseFloat(priceElement.innerText.replace("$", ""));
+        if (action === "increase") {
+          currentPrice += 1.0;
+        } else if (action === "decrease") {
+          currentPrice = currentPrice > 1 ? currentPrice - 1.0 : 0;
+        }
+        priceElement.innerText = `$${currentPrice.toFixed(2)}`;
+      }
+
+      loadXML();
+    </script>
+  </body>
+</html>
