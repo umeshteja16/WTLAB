@@ -43,46 +43,33 @@
     </style>
     <script>
         function validateForm() {
-            let username = document.getElementById("username").value;
-            let password = document.getElementById("password").value;
-            let confirmPassword = document.getElementById("confirmPassword").value;
+            let email = document.getElementById("email").value;
+            let allowedEmails = ['umeshteja@gmail.com', "manasa@gmail.com"]
             let errorMessage = "";
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-            if (username.length < 5) {
-                errorMessage += "Username must be at least 5 characters long.\n";
+            if (email.length && !emailRegex.test(email)) {
+                errorMessage += "It is not an email format.\n";
             }
-
-            if (password.length < 8) {
-                errorMessage += "Password must be at least 8 characters long.\n";
+            if (!allowedEmails.includes(email)) {
+                errorMessage += "Email is Unavailable.\n";
             }
-
-            if (password !== confirmPassword) {
-                errorMessage += "Passwords do not match.\n";
-            }
-
             if (errorMessage) {
                 alert(errorMessage);
                 return false;
             }
-            alert("Registration Successful");
+            alert("Reset Link Sent Successful");
             return true;
         }
     </script>
 </head>
 <body>
     <div class="container">
-        <h2>Register</h2>
+        <h2>Forgot Password</h2>
         <form onsubmit="return validateForm()">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username">
-            
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password">
-            
-            <label for="confirmPassword">Confirm Password:</label>
-            <input type="password" id="confirmPassword" name="confirmPassword">
-            
-            <button type="submit">Sign Up</button>
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email">
+            <button type="submit">Reset</button>
         </form>
     </div>
 </body>

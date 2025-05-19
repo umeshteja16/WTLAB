@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Online Bookstore - Shopping Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f8f8f8;
+        }
+        .book {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px;
+            background-color: white;
+        }
+        .cart {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #eef;
+        }
+        button {
+            background-color: #004080;
+            color: white;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Bookstore</h2>
+    <div class="book">
+        <h3>The Great Gatsby</h3>
+        <p>Price: $15.99</p>
+        <button onclick="addToCart('The Great Gatsby', 15.99)">Add to Cart</button>
+    </div>
+    <div class="book">
+        <h3>1984</h3>
+        <p>Price: $12.50</p>
+        <button onclick="addToCart('1984', 12.50)">Add to Cart</button>
+    </div>
+
+    <h2>Shopping Cart</h2>
+    <div class="cart">
+        <ul id="cart-items"></ul>
+        <p>Total: $<span id="cart-total">0</span></p>
+    </div>
+
+    <script src="cart.js"></script>
+</body>
+</html>

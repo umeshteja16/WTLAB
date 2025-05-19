@@ -78,4 +78,3 @@ public class Book extends HttpServlet {
         doGet(request, response);
     }
 }
-

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book Details</title>
+    <style>
+        body {
+            padding: 20px;
+            background-color: white;
+        }
+        .book {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px;
+            background-color: #eef;
+        }
+        h3 {
+            color: #004080;
+        }
+    </style>
+    <script>
+        function getBookDetails() {
+            const params = new URLSearchParams(window.location.search);
+            const bookId = params.get("book");
+            let bookData = {
+                "gatsby": { title: "The Great Gatsby", author: "F. Scott Fitzgerald", price: "$15.99" },
+                "1984": { title: "1984", author: "George Orwell", price: "$12.50" },
+                "mockingbird": { title: "To Kill a Mockingbird", author: "Harper Lee", price: "$14.99" }
+            };
+
+            let book = bookData[bookId];
+            if (book) {
+                document.getElementById("bookTitle").innerText = book.title;
+                document.getElementById("bookAuthor").innerText = "Author: " + book.author;
+                document.getElementById("bookPrice").innerText = "Price: " + book.price;
+            } else {
+                document.getElementById("bookDetails").innerHTML = "<p>Book details not found.</p>";
+            }
+        }
+    </script>
+</head>
+<body onload="getBookDetails()">
+    <h2>Book Details</h2>
+    <div id="bookDetails" class="book">
+        <h3 id="bookTitle">Select a book from navigation.</h3>
+        <p id="bookAuthor"></p>
+        <p id="bookPrice"></p>
+    </div>
+</body>
+</html>

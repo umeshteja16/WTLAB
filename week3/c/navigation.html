@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Navigation</title>
+    <style>
+        body {
+            background-color: #004080;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px;
+        }
+        a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        function loadBookDetails(bookId) {
+            parent.contentFrame.location.href = "content.html?book=" + bookId;
+        }
+    </script>
+</head>
+<body>
+    <h2>Online Bookstore Navigation</h2>
+    <ul>
+        <li><a onclick="loadBookDetails('gatsby')">The Great Gatsby</a></li>
+        <li><a onclick="loadBookDetails('1984')">1984</a></li>
+        <li><a onclick="loadBookDetails('mockingbird')">To Kill a Mockingbird</a></li>
+    </ul>
+</body>
+</html>
